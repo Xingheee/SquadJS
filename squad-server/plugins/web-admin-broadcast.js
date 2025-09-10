@@ -1,9 +1,9 @@
-import DiscordBasePlugin from './discord-base-plugin.js';
+import WebBasePlugin from './web-base-plugin.js';
 
-export default class DiscordAdminBroadcast extends DiscordBasePlugin {
+export default class WebAdminBroadcast extends WebBasePlugin {
   static get description() {
     return (
-      'The <code>DiscordAdminBroadcast</code> plugin will send a copy of admin broadcasts made in game to a Discord ' +
+      'The <code>WebAdminBroadcast</code> plugin will send a copy of admin broadcasts made in game to a Web ' +
       'channel.'
     );
   }
@@ -14,7 +14,7 @@ export default class DiscordAdminBroadcast extends DiscordBasePlugin {
 
   static get optionsSpecification() {
     return {
-      ...DiscordBasePlugin.optionsSpecification,
+      ...WebBasePlugin.optionsSpecification,
       channelID: {
         required: true,
         description: 'The ID of the channel to log admin broadcasts to.',
@@ -44,7 +44,7 @@ export default class DiscordAdminBroadcast extends DiscordBasePlugin {
   }
 
   async onAdminBroadcast(info) {
-    await this.sendDiscordMessage({
+    await this.sendWebMessage({
       embed: {
         title: 'Admin Broadcast',
         color: this.options.color,

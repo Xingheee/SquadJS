@@ -14,7 +14,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/Team-Silver-Sphere/SquadJS.svg?style=flat-square)](https://github.com/Team-Silver-Sphere/SquadJS/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/Team-Silver-Sphere/SquadJS.svg?style=flat-square)](https://github.com/Team-Silver-Sphere/SquadJS/pulls)
 [![GitHub issues](https://img.shields.io/github/stars/Team-Silver-Sphere/SquadJS.svg?style=flat-square)](https://github.com/Team-Silver-Sphere/SquadJS/stargazers)
-[![Discord](https://img.shields.io/discord/266210223406972928.svg?style=flat-square&logo=discord)](https://discord.gg/9F2Ng5C)
 
 <br><br>
 </div>
@@ -116,20 +115,12 @@ The following section of the configuration contains information about your Squad
 Connectors allow SquadJS to communicate with external resources.
   ```json
   "connectors": {
-    "discord": "Discord Login Token",
+    "mysql": "mysql://user:pass@example.com:3306/dbname"
   },
   ```
-Connectors should be named, for example the above is named `discord`, and should have the associated config against it. Configs can be specified by name in plugin options. Should a connector not be needed by any plugin then the default values can be left or you can remove it from your config file.
+Connectors should be named, for example the above is named `mysql`, and should have the associated config against it. Configs can be specified by name in plugin options. Should a connector not be needed by any plugin then the default values can be left or you can remove it from your config file.
 
 See below for more details on connectors and their associated config.
-
-##### Discord
-Connects to Discord via `discord.js`.
-  ```json
-  "discord": "Discord Login Token",
-  ```
-Requires a Discord bot login token.
-
 
 ##### Databases
 SquadJS uses [Sequelize](https://sequelize.org/) to connect and use a wide range of SQL databases.
@@ -150,6 +141,29 @@ or:
   ```
 
 See [Sequelize's documentation](https://sequelize.org/master/manual/getting-started.html#connecting-to-a-database) for more details.
+
+  ---
+</details>
+
+<details>
+  <summary>Web Interface</summary>
+
+## Web Interface Configuration
+
+SquadJS includes a built-in web interface powered by Socket.IO.
+
+```json
+"plugins": [
+  {
+    "plugin": "SocketIOAPI",
+    "enabled": true,
+    "websocketPort": 3000,
+    "securityToken": "MySecretPassword"
+  }
+]
+```
+
+After enabling, access your web client at `http://<host>:3000` and authenticate using the security token.
 
   ---
 </details>
@@ -233,14 +247,14 @@ SquadJS pings the following data to the [SquadJS API](https://github.com/Team-Si
 
 At this time, this cannot be disabled.
 
-Please note, plugin configurations do **not** and should **not** contain any sensitive information which allows us to collect this information. Any sensitive information, e.g. Discord login tokens, should be included in the `connectors` section of the config which is not sent to our API. It is important that developers of custom plugins maintain this approach to avoid submitting confidential information to our API.
+Please note, plugin configurations do **not** and should **not** contain any sensitive information which allows us to collect this information. Any sensitive information, such as database credentials, should be included in the `connectors` section of the config which is not sent to our API. It is important that developers of custom plugins maintain this approach to avoid submitting confidential information to our API.
 
 ## Versions and Releases
 Whilst installing SquadJS you may do the following to obtain slightly different versions:
 * Download the [latest release](https://github.com/Team-Silver-Sphere/SquadJS/releases/latest) - To get the latest **stable** version of SquadJS.
 * Download/clone the [`master` branch](https://github.com/Team-Silver-Sphere/SquadJS/) - To get the most up to date version of SquadJS.
 
-All changes proposed to SquadJS will be merged into the `master` branch prior to being released in the next stable version to allow for a period of larger-scale testing to occur. Therefore, we only recommend individuals who are willing to update regularly and partake in testing/bug reporting use the `master` branch. Please note, updates to the `master` branch will not be advertised in the SquadJS startup information, however, notifications of merged pull requests into the `master` branch may be found in our [Discord](https://discord.gg/9F2Ng5C). Once the `master` branch is deemed stable a release will be published and advertised via the SquadJS startup information and our [Discord](https://discord.gg/9F2Ng5C).
+All changes proposed to SquadJS will be merged into the `master` branch prior to being released in the next stable version to allow for a period of larger-scale testing to occur. Therefore, we only recommend individuals who are willing to update regularly and partake in testing/bug reporting use the `master` branch. Please note, updates to the `master` branch will not be advertised in the SquadJS startup information. Once the `master` branch is deemed stable a release will be published and advertised via the SquadJS startup information.
 
 Releases will be given a version number with the format `v{major}.{minor}.{patch}`, e.g. `v3.1.4`. Changes to `{major}`/`{minor}`/`{patch}` will imply the following:
 * `{major}` - The release contains a new/updated feature that is (potentially) breaking, e.g. changes to event outputs that may cause custom plugins to break.
@@ -261,7 +275,7 @@ SquadJS would not be possible without the support of so many individuals and org
 * Shanomac99 and the rest of the Squad Wiki team for providing us with [layer information](https://github.com/Squad-Wiki-Editorial/squad-wiki-pipeline-map-data).
 * Fourleaf, Mex, various members of ToG / ToG-L and others that helped to stage logs and participate in small scale tests.
 * Various Squad servers/communities for participating in larger scale tests and for providing feedback on plugins.
-* Everyone in the [Squad RCON Discord](https://discord.gg/9F2Ng5C) and others who have submitted bug reports, suggestions, feedback and provided logs.
+* Everyone who has submitted bug reports, suggestions, feedback and provided logs.
 
 ## License
 ```

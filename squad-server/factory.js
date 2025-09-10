@@ -152,7 +152,7 @@ export default class SquadServerFactory {
       return awn;
     }
 
-    throw new Error(`${type.connector} is an unsupported connector type.`);
+    throw new Error(`${type} is an unsupported connector type.`);
   }
 
   static parseConfig(configString) {

@@ -28,6 +28,7 @@ class Plugins {
         [
           'index.js',
           'base-plugin.js',
+          'web-base-plugin.js',
           'discord-base-message-updater.js',
           'discord-base-plugin.js',
           'readme.md'

@@ -27,7 +27,6 @@
     ]
   },
   "connectors": {
-    "discord": "Discord Login Token",
     "awnAPI": {"orgID":"YourOrgID", "creds": {"username":"AwnUsername", "password":"AwnPassword"}},
     "mysql": {
       "host": "host",

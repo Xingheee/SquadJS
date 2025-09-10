@@ -42,4 +42,9 @@ function aPluginToLogTeamkills(server){
 ```
 Various actions can be completed in a plugin. Most of these will involve outside system, e.g. Discord.js to run a Discord bot, so they are not documented here. However, you may run RCON commands using `server.rcon.execute("Command");`.
 
-If you're struggling to create a plugin, the existing [`plugins`](https://github.com/Team-Silver-Sphere/SquadJS/tree/master/squad-server/plugins) are a good place to go for examples or feel free to ask for help in the Squad RCON Discord. 
+If you're struggling to create a plugin, the existing [`plugins`](https://github.com/Team-Silver-Sphere/SquadJS/tree/master/squad-server/plugins) are a good place to go for examples or feel free to ask for help in the Squad RCON Discord.
+
+## Web Plugin Authentication
+The `WebBasePlugin` provides a lightweight HTTP server and protects `/config` routes with a simple token based middleware.
+
+Configure the `authToken` option for your plugin and supply the token in the `Authorization` header, as a `token` query parameter or via a cookie named using the `authCookieName` option.

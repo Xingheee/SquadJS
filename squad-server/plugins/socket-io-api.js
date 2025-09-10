@@ -1,7 +1,6 @@
-import { createServer } from 'http';
 import { Server } from 'socket.io';
 
-import BasePlugin from './base-plugin.js';
+import WebBasePlugin from './web-base-plugin.js';
 
 const eventsToBroadcast = [
   'CHAT_MESSAGE',
@@ -33,7 +32,7 @@ const eventsToBroadcast = [
   'SQUAD_CREATED'
 ];
 
-export default class SocketIOAPI extends BasePlugin {
+export default class SocketIOAPI extends WebBasePlugin {
   static get description() {
     return (
       'The <code>SocketIOAPI</code> plugin allows remote access to a SquadJS instance via Socket.IO' +
@@ -58,12 +57,7 @@ export default class SocketIOAPI extends BasePlugin {
 
   static get optionsSpecification() {
     return {
-      websocketPort: {
-        required: true,
-        description: 'The port for the websocket.',
-        default: '',
-        example: '3000'
-      },
+      ...WebBasePlugin.optionsSpecification,
       securityToken: {
         required: true,
         description: 'Your secret token/password for connecting.',
@@ -76,11 +70,9 @@ export default class SocketIOAPI extends BasePlugin {
   constructor(server, options, connectors) {
     super(server, options, connectors);
 
-    this.httpServer = createServer();
-
-    this.io = new Server(this.httpServer, {
+    this.io = new Server(this.webServer, {
       cors: {
-        origin: 'http://localhost:3000',
+        origin: `http://localhost:${this.options.port}`,
         methods: ['GET', 'POST']
       }
     });
@@ -104,14 +96,6 @@ export default class SocketIOAPI extends BasePlugin {
         });
       }
     });
-  }
-
-  async mount() {
-    this.httpServer.listen(this.options.websocketPort);
-  }
-
-  async unmount() {
-    this.httpServer.close();
   }
 
   bindListeners(socket, obj, prefix = '') {

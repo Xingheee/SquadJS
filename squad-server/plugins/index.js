@@ -30,6 +30,7 @@ class Plugins {
           'base-plugin.js',
           'discord-base-message-updater.js',
           'discord-base-plugin.js',
+          'web-base-plugin.js',
           'readme.md'
         ].includes(dirent.name)
       )

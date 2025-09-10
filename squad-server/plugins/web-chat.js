@@ -1,8 +1,8 @@
-import DiscordBasePlugin from './discord-base-plugin.js';
+import WebBasePlugin from './web-base-plugin.js';
 
-export default class DiscordChat extends DiscordBasePlugin {
+export default class WebChat extends WebBasePlugin {
   static get description() {
-    return 'The <code>DiscordChat</code> plugin will log in-game chat to a Discord channel.';
+    return 'The <code>WebChat</code> plugin will log in-game chat for web clients.';
   }
 
   static get defaultEnabled() {
@@ -11,13 +11,6 @@ export default class DiscordChat extends DiscordBasePlugin {
 
   static get optionsSpecification() {
     return {
-      ...DiscordBasePlugin.optionsSpecification,
-      channelID: {
-        required: true,
-        description: 'The ID of the channel to log admin broadcasts to.',
-        default: '',
-        example: '667741905228136459'
-      },
       chatColors: {
         required: false,
         description: 'The color of the embed for each chat.',
@@ -54,7 +47,7 @@ export default class DiscordChat extends DiscordBasePlugin {
   async onChatMessage(info) {
     if (this.options.ignoreChats.includes(info.chat)) return;
 
-    await this.sendDiscordMessage({
+    await this.sendWebMessage({
       embed: {
         title: info.chat,
         color: this.options.chatColors[info.chat] || this.options.color,
